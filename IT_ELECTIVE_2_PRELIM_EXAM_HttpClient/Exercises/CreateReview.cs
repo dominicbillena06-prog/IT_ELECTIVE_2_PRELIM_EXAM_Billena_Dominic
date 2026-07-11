@@ -22,7 +22,7 @@ public static class CreateReview
         // TODO: Send POST request to https://jsonplaceholder.typicode.com/posts
         // TODO: Assert status code is 201 Created
         // TODO: Parse the response JSON
-        // TODO: Assert the response has an "id" field with a value
+        // TODO: Assert the response has an "id" field with a valuee
 
         throw new NotImplementedException();
     }
