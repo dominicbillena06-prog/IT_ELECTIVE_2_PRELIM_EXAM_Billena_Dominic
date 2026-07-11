@@ -4,21 +4,23 @@ using System.Text.Json;
 
 namespace IT_ELECTIVE_2_PRELIM_EXAM_HttpClient.Exercises;
 
+// EXERCISE 6: POST Create Review
 // JSONPlaceholder API: https://jsonplaceholder.typicode.com/posts
 
 public static class CreateReview
 {
-    public static async Task Run(System.Net.Http.HttpClient client)
+    public static async Task Run(HttpClient client)
     {
         var url = "https://jsonplaceholder.typicode.com/posts";
 
-        var json = """
+        var review = new
         {
-            "title": "Great Pasta!",
-            "body": "Loved this recipe",
-            "userId": 1
-        }
-        """;
+            title = "Great Recipe",
+            body = "This meal was delicious.",
+            userId = 1
+        };
+
+        var json = JsonSerializer.Serialize(review);
 
         var content = new StringContent(
             json,
@@ -33,15 +35,15 @@ public static class CreateReview
             throw new Exception("Expected status code 201 Created.");
         }
 
-        var responseBody = await response.Content.ReadAsStringAsync();
+        var body = await response.Content.ReadAsStringAsync();
 
-        using JsonDocument doc = JsonDocument.Parse(responseBody);
+        using JsonDocument doc = JsonDocument.Parse(body);
 
-        if (!doc.RootElement.TryGetProperty("id", out var id))
+        if (!doc.RootElement.TryGetProperty("id", out _))
         {
             throw new Exception("Response does not contain id field.");
         }
 
-        Console.WriteLine($"Review created successfully. ID: {id}");
+        Console.WriteLine("Review created successfully.");
     }
 }
