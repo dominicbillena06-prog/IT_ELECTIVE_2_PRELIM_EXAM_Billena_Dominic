@@ -61,7 +61,7 @@ public class Kitchen
         return $"Kitchen: {kitchenName} | Chef: {headChef} | Meals: {mealCount}";
     }
 
-    public string PrepareMeal(string mealName)
+    protected string PrepareMeal(string mealName)
     {
         return $"Preparing {mealName} in {kitchenName}...";
     }
