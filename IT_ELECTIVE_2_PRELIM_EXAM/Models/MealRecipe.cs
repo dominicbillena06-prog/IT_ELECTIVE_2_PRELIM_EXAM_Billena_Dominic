@@ -2,7 +2,7 @@ using IT_ELECTIVE_2_PRELIM_EXAM.Interfaces;
 
 namespace IT_ELECTIVE_2_PRELIM_EXAM.Models;
 
-public class MealRecipe : RecipeBase
+public class MealRecipe : RecipeBase, IRecipeSearchable
 {
     public string Category { get; set; } = "";
     public string Area { get; set; } = "";
@@ -27,8 +27,25 @@ public class MealRecipe : RecipeBase
         Category = category;
         Area = area;
     }
+
     public override string GetRecipeInfo()
     {
         return $"{base.GetRecipeInfo()} | Category: {Category} | Area: {Area}";
+    }
+
+    public string SearchCriteria
+    {
+        get
+        {
+            return Title;
+        }
+    }
+
+    public bool MatchesSearch(string searchTerm)
+    {
+        return Title.Contains(
+            searchTerm,
+            StringComparison.OrdinalIgnoreCase
+        );
     }
 }
