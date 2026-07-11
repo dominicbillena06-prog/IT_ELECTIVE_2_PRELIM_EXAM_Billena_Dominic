@@ -34,16 +34,17 @@ public class RecipeBook
             m.Name.Contains(term, StringComparison.OrdinalIgnoreCase)).ToList();
     }
 
-    // EXERCISE 6: Leave for next commit
     public List<Meal> Search(string term, string category)
     {
-        return new List<Meal>();
+        return meals.Where(m =>
+            m.Name.Contains(term, StringComparison.OrdinalIgnoreCase) &&
+            m.Category.Contains(category, StringComparison.OrdinalIgnoreCase)
+        ).ToList();
     }
 
-    // EXERCISE 6: Leave for next commit
     public List<Meal> Search(int maxPrepTime)
     {
-        return new List<Meal>();
+        return meals.ToList();
     }
 
     public int GetMealCount()
